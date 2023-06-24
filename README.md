@@ -1,6 +1,6 @@
 #### Introduction
 
-This is a simple REST mock server written with Python `3.11` and Flask `2.3.2`.
+This is a simple REST mock server written with Python `3.11` and Flask `2.3.2`. It also comes with Gunicorn which enables hot reload for local development.
 
 It provides sample endpoints to render output either based on static resource file or simple logic as defined in `mock.py`.
 
@@ -111,10 +111,15 @@ Response with delay of 3000 milliseconds
 
 #### Build and run
 ```console
-flask --app mock.py run
+gunicorn --reload --bind 0.0.0.0:3000 "mock:app"
 ```
-#### Build and run with docker
+#### Build and run with docker-compose
 ```console
-docker build -t tnite-mock-flask:latest .
-docker run -p 5000:5000 tnite-mock:latest
+docker-compose up -d
 ```
+
+## Contributing
+I appreciate all suggestions or PRs which will help making the mock better. Feel free to fork the project and create a pull request with your idea.
+
+#### To do
+1. Add Openapi
