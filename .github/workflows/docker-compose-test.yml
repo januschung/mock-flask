@@ -1,0 +1,22 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Bring up application with docker-compose
+      uses: isbang/compose-action@v1.4.1
+      with:
+        compose-file: "./docker-compose.yml"
+    - name: Test docker-compose application is working
+      run: |
+          curl -v "http://localhost:5000/status?code=200"

@@ -3,10 +3,10 @@ services:
   app:
     container_name: mock
     build:
-      context: .
+      context: ./app
       dockerfile: Dockerfile
-    command: gunicorn --reload --bind 0.0.0.0:5000 "mock:app"
+    command: gunicorn --reload --bind 0.0.0.0:5000 "app:create_app()"
     volumes:
-      - .:/project
+      - ./app:/project
     ports:
       - 5000:5000

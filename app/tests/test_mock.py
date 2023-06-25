@@ -5,6 +5,7 @@ import pytest
 def test_resource_100(client):
     response = client.get("/resource?data=100")
     expect_response = [{"age":"30","id":"100","name":"jack"},{"age":"32","id":"101","name":"jill"}]
+    print(response)
     assert json.loads(response.data) == expect_response
 
 def test_resource_200(client):
