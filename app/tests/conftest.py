@@ -1,10 +1,12 @@
 import pytest
-import mock
+import mock_blueprint
+from app import create_app
+
 
 
 @pytest.fixture()
 def app():
-    app = mock.app
+    app = create_app()
     app.config.update({
         "TESTING": True,
     })
