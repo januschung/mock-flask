@@ -111,7 +111,7 @@ Response with delay of 3000 milliseconds
 
 #### Build and run
 ```console
-gunicorn --reload --bind 0.0.0.0:3000 "mock:app"
+gunicorn --reload --bind localhost:3000 "app:create_app"
 ```
 #### Build and run with docker-compose
 ```console

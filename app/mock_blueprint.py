@@ -48,7 +48,3 @@ def delay():
     current_app.logger.info(f"Receive sleep time {ms} milliseconds")
     time.sleep(ms/1000)
     return f"Response with delay of {ms} milliseconds"
-
-# if __name__ == '__main__':
-#     port = int(os.environ.get('PORT', 5000))
-#     app.run(host='0.0.0.0', port=port)
