@@ -19,5 +19,5 @@ jobs:
         compose-file: "./docker-compose.yml"
     - name: Test docker-compose application is working
       run: |
-        sleep(20)
+        sleep 20
         curl -v "http://localhost:5000/status?code=200"
