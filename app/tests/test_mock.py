@@ -32,7 +32,26 @@ def test_status(client, code, status_name):
     assert response.data.decode('utf-8') == f"{code} {status_name}"
     assert response.status_code == code
 
+
+@pytest.mark.parametrize("code", [0, 1, 399, 999])
+def test_status_non_valid_http_code(client, code):
+    response = client.get(f"/status?code={code}")
+    assert response.data.decode('utf-8') == f"{code} is not a valid HTTPStatus"
+    assert response.status_code == code
+
+@pytest.mark.parametrize("bad_code", ["a", "_", "12a", ""])
+def test_status_non_nummeric_input(client, bad_code):
+    with pytest.raises(ValueError) as e:
+        client.get(f"/status?code={bad_code}")
+    assert str(e.value) == f"invalid literal for int() with base 10: '{bad_code}'"
+
 @pytest.mark.parametrize("ms", [0, 1, 2, 100, 1000, 2000, 3000])
 def test_delay(client, ms):
     response = client.get(f"delay?ms={ms}")
     assert f"{ms}" in response.data.decode('utf-8')
+
+@pytest.mark.parametrize("bad_input", ["a", "_", "12a", ""])
+def test_delay_bad_input(client, bad_input):
+    with pytest.raises(ValueError) as e:
+        client.get(f"/delay?ms={bad_input}")
+    assert str(e.value) == f"invalid literal for int() with base 10: '{bad_input}'"
